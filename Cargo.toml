@@ -1,0 +1,23 @@
+[package]
+name = "advent-of-code"
+version = "1.0.0"
+edition = "2021"
+
+[workspace]
+members = [
+  "packages/utils"
+]
+
+[workspace.package]
+edition = "2021"
+version = "1.0.0"
+authors = ["Sylvain Marty"]
+
+[dependencies]
+
+[workspace.dependencies]
+utils = { version = "1.0.0", path = "packages/utils" }
+
+[[bin]]
+name = "test"
+path = "src/day-1/main.rs"
