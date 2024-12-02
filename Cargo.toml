@@ -6,7 +6,8 @@ edition = "2021"
 [workspace]
 members = [
   "packages/utils",
-  "packages/day-1"
+  "packages/day-1",
+  "packages/day-2"
 ]
 
 [workspace.package]
