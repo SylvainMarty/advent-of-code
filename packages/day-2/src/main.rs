@@ -6,64 +6,68 @@ fn main() {
   // Part 1
   let mut result_part1 = 0;
   for line in vec.clone() {
-    print!("{:?}", line);
-    let mut is_safe = true;
+    let mut is_line_safe = true;
     let direction = line[0] < line[1];
     for i in 1..line.len() {
-      if direction != (line[i - 1] < line[i]) {
-        is_safe = false;
-        break;
-      }
-      let diff = (line[i] - line[i - 1]).abs();
-      if diff < 1 || diff > 3 {
-        is_safe = false;
+      if !is_safe(direction, line[i-1], line[i]) {
+        is_line_safe = false;
         break;
       }
     }
-    if is_safe {
+    if is_line_safe {
       result_part1 += 1;
-      println!(" > safe");
-    } else {
-      println!(" > unsafe");
     }
   }
+  let time_part_1 = start.elapsed();
 
   // Part 2
+  let start_part2 = std::time::Instant::now();
   let mut result_part2 = 0;
   for line in vec {
-    print!("{:?}", line);
-    let mut unsafe_tolerance = 1;
-    let mut is_safe = true;
-    let direction = line[0] < line[1];
-    for i in 1..line.len() {
-      if direction != (line[i - 1] < line[i]) {
-        if unsafe_tolerance <= 0 {
-          is_safe = false;
-          break;
-        }
-        unsafe_tolerance -= 1;
-      }
-      let diff = (line[i] - line[i - 1]).abs();
-      if diff < 1 || diff > 3 {
-        if unsafe_tolerance <= 0 {
-          is_safe = false;
-          break;
-        }
-        unsafe_tolerance -= 1;
+    let mut safe = false;
+    for i in 0..line.len() {
+      let mut cloned_line = line.clone();
+      cloned_line.remove(i);
+      if is_line_safe(cloned_line) {
+        safe = true;
+        break;
       }
     }
-    if is_safe {
+    if safe {
       result_part2 += 1;
-      println!(" > safe");
-    } else {
-      println!(" > unsafe");
     }
   }
+  let time_part_2 = start_part2.elapsed();
 
   // End
   println!("Result part 1: {}", result_part1);
+  println!(" > Done part 1 in: {:?}", time_part_1);
   println!("Result part 2: {}", result_part2);
-  eprintln!("Total done in: {:?}", start.elapsed()); 
+  println!(" > Done part 2 in: {:?}", time_part_2);
+  println!("Total done in: {:?}", start.elapsed()); 
+}
+
+fn is_line_safe(line: Vec<i32>) -> bool {
+  let mut is_line_safe = true;
+  let direction = line[0] < line[1];
+  for i in 1..line.len() {
+    if !is_safe(direction, line[i-1], line[i]) {
+      is_line_safe = false;
+      break;
+    }
+  }
+  is_line_safe
+}
+
+fn is_safe(direction: bool, prev: i32, curr: i32) -> bool {
+  if direction != (prev < curr) {
+    return false;
+  }
+  let diff = (curr - prev).abs();
+  if diff < 1 || diff > 3 {
+    return false;
+  }
+  true
 }
 
 fn get_input() -> Vec<Vec<i32>> {
