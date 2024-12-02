@@ -23,6 +23,7 @@ fn main() {
   // Part 2
   let start_part2 = std::time::Instant::now();
   let mut result_part2 = 0;
+  // Super mega dumb quadratic solution but hec I'm tired
   for line in vec {
     let mut safe = false;
     for i in 0..line.len() {
