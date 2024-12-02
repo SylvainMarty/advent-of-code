@@ -1,10 +1,16 @@
 use utils::filesystem::read_lines;
+use utils::solutions::execute_all;
 
 fn main() {
-  let start = std::time::Instant::now();
+  execute_all(vec![
+    ("Part 1", part_1),
+    ("Part 2", part_2),
+  ]);
+}
+
+fn part_1() -> i32 {
   let vec = get_input();
-  // Part 1
-  let mut result_part1 = 0;
+  let mut result = 0;
   for line in vec.clone() {
     let mut is_line_safe = true;
     let direction = line[0] < line[1];
@@ -15,15 +21,16 @@ fn main() {
       }
     }
     if is_line_safe {
-      result_part1 += 1;
+      result += 1;
     }
   }
-  let time_part_1 = start.elapsed();
+  result
+}
 
-  // Part 2
-  let start_part2 = std::time::Instant::now();
-  let mut result_part2 = 0;
+fn part_2() -> i32 {
+  let vec = get_input();
   // Super mega dumb quadratic solution but hec I'm tired
+  let mut result = 0;
   for line in vec {
     let mut safe = false;
     for i in 0..line.len() {
@@ -35,17 +42,10 @@ fn main() {
       }
     }
     if safe {
-      result_part2 += 1;
+      result += 1;
     }
   }
-  let time_part_2 = start_part2.elapsed();
-
-  // End
-  println!("Result part 1: {}", result_part1);
-  println!(" > Done part 1 in: {:?}", time_part_1);
-  println!("Result part 2: {}", result_part2);
-  println!(" > Done part 2 in: {:?}", time_part_2);
-  println!("Total done in: {:?}", start.elapsed()); 
+  result
 }
 
 fn is_line_safe(line: Vec<i32>) -> bool {
