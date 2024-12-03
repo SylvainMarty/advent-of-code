@@ -2,14 +2,17 @@ use utils::filesystem::read_lines;
 use utils::solutions::execute_all;
 
 fn main() {
+  let vec = get_input();
+  let vec2 = vec.clone();
+  let pt1 = || part_1(vec);
+  let pt2 = || part_2(vec2);
   execute_all(vec![
-    ("Part 1", part_1),
-    ("Part 2", part_2),
+    ("Part 1", Box::new(pt1)),
+    ("Part 2", Box::new(pt2)),
   ]);
 }
 
-fn part_1() -> i32 {
-  let vec = get_input();
+fn part_1(vec: Vec<Vec<i32>>) -> i32 {
   let mut result = 0;
   for line in vec.clone() {
     let mut is_line_safe = true;
@@ -27,8 +30,7 @@ fn part_1() -> i32 {
   result
 }
 
-fn part_2() -> i32 {
-  let vec = get_input();
+fn part_2(vec: Vec<Vec<i32>>) -> i32 {
   // Super mega dumb quadratic solution but hec I'm tired
   let mut result = 0;
   for line in vec {
