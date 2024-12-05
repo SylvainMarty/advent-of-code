@@ -9,7 +9,8 @@ members = [
   "packages/day-1",
   "packages/day-2",
   "packages/day-3",
-  "packages/day-4"
+  "packages/day-4",
+  "packages/day-5"
 ]
 
 [workspace.package]
