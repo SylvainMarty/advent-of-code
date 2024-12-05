@@ -10,9 +10,16 @@ pub fn execute_all(closures: Vec<(&str, Box<dyn FnOnce() -> i32>)>) {
   let start = std::time::Instant::now();
   let mut results = Vec::new();
   for (name, closure) in closures {
+    println!("{}: executing...", name);
     results.push(execute_solution(name, closure));
+    println!("{}: done!", name);
   }
   let total_duration = start.elapsed();
+  println!("");
+  println!("=====================================");
+  println!("============= Results ===============");
+  println!("=====================================");
+  println!("");
   for (name, result, duration) in results {
     println!("{} result: {:?}", name, result);
     println!("{} done in: {:?}", name, duration);
