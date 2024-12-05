@@ -11,17 +11,6 @@ pub fn part_1(lines: Vec<String>) -> i32 {
   result
 }
 
-#[cfg(test)]
-mod tests_part_1 {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-      let lines = vec!["test1".to_string()];
-      assert_eq!(part_1(lines), 0);
-    }
-}
-
 pub fn part_2(lines: Vec<String>) -> i32 {
   let mut result = 0;
   for line in lines {
@@ -31,12 +20,21 @@ pub fn part_2(lines: Vec<String>) -> i32 {
 }
 
 #[cfg(test)]
-mod tests_part_2 {
+mod tests {
     use super::*;
 
+    static TEST_LINES: [&str; 2] = [
+      "",
+      "",
+    ];
+
     #[test]
-    fn it_works() {
-      let lines = vec!["test2".to_string()];
-      assert_eq!(part_2(lines), 0);
+    fn part_1_works() {
+      assert_eq!(part_1(TEST_LINES.into_iter().map(|x| x.to_string()).collect()), 143);
+    }
+
+    #[test]
+    fn part_2_works() {
+      assert_eq!(part_2(TEST_LINES.into_iter().map(|x| x.to_string()).collect()), 123);
     }
 }
