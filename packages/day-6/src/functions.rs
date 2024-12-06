@@ -27,7 +27,8 @@ pub fn find_guard_position(grid: &Vec<Vec<char>>) -> (usize, usize) {
   (x, y)
 }
 
-pub fn get_guard_path(grid: &Vec<Vec<char>>, m: usize, n: usize, guard_x: usize, guard_y: usize) -> (i32, Vec<Vec<char>>) {
+// pub fn get_guard_path(grid: &Vec<Vec<char>>, m: usize, n: usize, guard_x: usize, guard_y: usize) -> (HashSet<(usize, usize)>, Vec<Vec<char>>) {
+pub fn get_guard_path(grid: &Vec<Vec<char>>, m: usize, n: usize, guard_x: usize, guard_y: usize) -> HashSet<(usize, usize)> {
   // Guard always starts by going up
   const DIRECTIONS_X: [i32; 4] = [-1, 0, 1, 0];
   const DIRECTIONS_Y: [i32; 4] = [0, 1, 0, -1];
@@ -35,8 +36,6 @@ pub fn get_guard_path(grid: &Vec<Vec<char>>, m: usize, n: usize, guard_x: usize,
   let mut dir_idx = 0;
   let mut next_x = guard_x;
   let mut next_y = guard_y;
-  let mut result = 0;
-  let mut guard_grid = grid.clone().iter().map(|x| x.clone()).collect::<Vec<Vec<char>>>();
   while is_inside_coord(next_x as i32, next_y as i32, m, n) {
     let next_cell = grid[next_x][next_y];
     if next_cell == '#' {
@@ -48,15 +47,13 @@ pub fn get_guard_path(grid: &Vec<Vec<char>>, m: usize, n: usize, guard_x: usize,
       }
     } else {
       if !position_seen.contains(&(next_x, next_y)) {
-        result += 1;
-        guard_grid[next_x][next_y] = 'X';
         position_seen.insert((next_x, next_y));
       }
     }
     next_x = ((next_x as i32) + DIRECTIONS_X[dir_idx]) as usize;
     next_y = ((next_y as i32) + DIRECTIONS_Y[dir_idx]) as usize;
   }
-  (result, guard_grid)
+  position_seen
 }
 
 pub fn is_guard_on_loop(grid: &Vec<Vec<char>>, m: usize, n: usize, guard_x: usize, guard_y: usize) -> bool {
