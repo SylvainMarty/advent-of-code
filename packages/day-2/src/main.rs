@@ -12,7 +12,7 @@ fn main() {
   ]);
 }
 
-fn part_1(vec: Vec<Vec<i32>>) -> i32 {
+fn part_1(vec: Vec<Vec<i32>>) -> i64 {
   let mut result = 0;
   for line in vec.clone() {
     let mut is_line_safe = true;
@@ -30,7 +30,7 @@ fn part_1(vec: Vec<Vec<i32>>) -> i32 {
   result
 }
 
-fn part_2(vec: Vec<Vec<i32>>) -> i32 {
+fn part_2(vec: Vec<Vec<i32>>) -> i64 {
   // Super mega dumb quadratic solution but hec I'm tired
   let mut result = 0;
   for line in vec {

@@ -1,14 +1,14 @@
 use crate::functions::{find_guard_position, get_guard_path, is_guard_on_loop};
 
-pub fn part_1(grid: Vec<Vec<char>>) -> i32 {
+pub fn part_1(grid: Vec<Vec<char>>) -> i64 {
   let m = grid.len();
   let n = grid[0].len();
   let (guard_x, guard_y) = find_guard_position(&grid);
   let guard_positions = get_guard_path(&grid, m, n, guard_x, guard_y);
-  guard_positions.len() as i32
+  guard_positions.len() as i64
 }
 
-pub fn part_2(grid: Vec<Vec<char>>) -> i32 {
+pub fn part_2(grid: Vec<Vec<char>>) -> i64 {
   let m = grid.len();
   let n = grid[0].len();
   let (guard_x, guard_y) = find_guard_position(&grid);

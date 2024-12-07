@@ -1,7 +1,7 @@
 use crate::functions::{get_xmas_count_from_lines_all_axis, get_xmas_count_from_lines_in_diagonals};
 
-pub fn part_1(lines: Vec<String>) -> i32 {
-  get_xmas_count_from_lines_all_axis(lines)
+pub fn part_1(lines: Vec<String>) -> i64 {
+  get_xmas_count_from_lines_all_axis(lines) as i64
 }
 
 #[cfg(test)]
@@ -26,8 +26,8 @@ mod tests_part_1 {
     }
 }
 
-pub fn part_2(lines: Vec<String>) -> i32 {
-  get_xmas_count_from_lines_in_diagonals(lines)
+pub fn part_2(lines: Vec<String>) -> i64 {
+  get_xmas_count_from_lines_in_diagonals(lines) as i64
 }
 
 #[cfg(test)]

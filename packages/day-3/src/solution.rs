@@ -1,7 +1,7 @@
 use crate::functions::compute_mul_from_lines;
 
-pub fn part_1(lines: Vec<String>) -> i32 {
-  compute_mul_from_lines(lines)
+pub fn part_1(lines: Vec<String>) -> i64 {
+  compute_mul_from_lines(lines) as i64
 }
 
 #[cfg(test)]
@@ -15,7 +15,7 @@ mod tests_part_1 {
     }
 }
 
-pub fn part_2(lines: Vec<String>) -> i32 {
+pub fn part_2(lines: Vec<String>) -> i64 {
   const CAN_DO_INSTR: [char; 4] = ['d', 'o', '(', ')'];
   const CANNOT_DO_INSTR: [char; 7] = ['d', 'o', 'n', '\'', 't', '(', ')'];
   let mut can_do_instr = CAN_DO_INSTR.to_vec();
@@ -53,7 +53,7 @@ pub fn part_2(lines: Vec<String>) -> i32 {
       lines_to_process.push(subline);
     }
   }
-  compute_mul_from_lines(lines_to_process)
+  compute_mul_from_lines(lines_to_process) as i64
 }
 
 #[cfg(test)]

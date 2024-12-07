@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 use crate::functions::{extract_rules_and_updates, is_update_valid};
 
-pub fn part_1(lines: Vec<String>) -> i32 {
+pub fn part_1(lines: Vec<String>) -> i64 {
   let (inverted_rules, updates) = extract_rules_and_updates(lines);
   let mut result = 0;
   let mut error_updates_count = 0;
@@ -15,10 +15,10 @@ pub fn part_1(lines: Vec<String>) -> i32 {
     result += middle_value;
   }
   println!("Errors updates count: {}", error_updates_count);
-  result
+  result as i64
 }
 
-pub fn part_2(lines: Vec<String>) -> i32 {
+pub fn part_2(lines: Vec<String>) -> i64 {
   let (inverted_rules, updates) = extract_rules_and_updates(lines);
   let mut result = 0;
   for update in updates {
@@ -61,7 +61,7 @@ pub fn part_2(lines: Vec<String>) -> i32 {
     let middle_value = fixed_update[fixed_update.len() / 2];
     result += middle_value;
   }
-  result
+  result as i64
 }
 
 #[cfg(test)]
