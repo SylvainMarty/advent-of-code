@@ -1,14 +1,4 @@
-fn convert_lines_to_grid(lines: Vec<String>) -> Vec<Vec<char>> {
-  let mut grid = Vec::new();
-  for line in lines {
-    grid.push(line.chars().collect());
-  }
-  grid
-}
-
-fn valid_coord(x: i32, y: i32, m: usize, n: usize) -> bool {
-  x >= 0 && x < (m as i32) && y >= 0 && y < (n as i32)
-}
+use utils::vector::{convert_lines_to_grid,is_valid_coord};
 
 fn find_word(index: usize, word: &Vec<char>, grid: &Vec<Vec<char>>, l: usize, m: usize, n: usize, x: i32, y: i32, dir_x: i32, dir_y: i32) -> bool {
   // if word has been found
@@ -16,7 +6,7 @@ fn find_word(index: usize, word: &Vec<char>, grid: &Vec<Vec<char>>, l: usize, m:
     return true;
   }
   // if the current coordinate is valid and characters match, then check the next index
-  if valid_coord(x, y, m, n) && word[index] == grid[x as usize][y as usize] {
+  if is_valid_coord(x, y, m, n) && word[index] == grid[x as usize][y as usize] {
     return find_word(index + 1, &word, grid, l, m, n, x + dir_x, y + dir_y, dir_x, dir_y);
   }
 
@@ -24,7 +14,7 @@ fn find_word(index: usize, word: &Vec<char>, grid: &Vec<Vec<char>>, l: usize, m:
 }
 
 pub fn get_xmas_count_from_lines_all_axis(lines: Vec<String>) -> i32 {
-  let grid = convert_lines_to_grid(lines);
+  let grid = convert_lines_to_grid(&lines);
   get_word_count_in_2d_grid_all_axis(&grid, "XMAS".to_string().chars().collect())
 }
 
@@ -55,7 +45,7 @@ fn get_word_count_in_2d_grid_all_axis(grid: &Vec<Vec<char>>, word: Vec<char>) ->
 }
 
 pub fn get_xmas_count_from_lines_in_diagonals(lines: Vec<String>) -> i32 {
-  let grid = convert_lines_to_grid(lines);
+  let grid = convert_lines_to_grid(&lines);
   get_word_count_in_2d_grid_in_diagonals(&grid, "MAS".to_string().chars().collect())
 }
 
