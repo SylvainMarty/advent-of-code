@@ -13,7 +13,8 @@ members = [
   "packages/day-5",
   "packages/day-6",
   "packages/day-7",
-  "packages/day-8"
+  "packages/day-8",
+  "packages/day-9"
 ]
 
 [workspace.package]
@@ -28,4 +29,4 @@ utils = { version = "1.0.0", path = "packages/utils" }
 
 [[bin]]
 name = "test"
-path = "src/day-1/main.rs"
+path = "packages/day-1/src/main.rs"
