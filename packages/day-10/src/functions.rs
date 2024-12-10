@@ -1,28 +1,74 @@
+use std::collections::HashSet;
 use utils::vector::is_valid_coord;
 
-pub fn count_trailhead_recursive(dirs_x: &Vec<i32>, dirs_y: &Vec<i32>, grid: &Vec<Vec<i64>>, m: usize, n: usize, x: usize, y: usize, curr_count: i64, curr_height: i64) -> i64 {
-  println!(" > x: {}, y: {}, grid[x][y]: {}, curr_count: {}, curr_height: {}", x, y, grid[x][y], curr_count, curr_height);
+pub fn count_trailhead_recursive(
+  dirs_x: &Vec<i32>,
+  dirs_y: &Vec<i32>,
+  grid: &Vec<Vec<i64>>,
+  curr_count: &mut HashSet<(usize, usize)>,
+  m: usize,
+  n: usize,
+  x: usize,
+  y: usize,
+  curr_height: i64
+) {
   if grid[x][y] == 9 {
-    return curr_count + 1;
+    curr_count.insert((x, y));
+    return;
   }
-  let mut curr_count = curr_count;
   for k in 0..dirs_x.len() {
-    let dir_x = x as i32 + dirs_x[k];
-    let dir_y = y as i32 + dirs_y[k];
+    let dir_x: usize = (x as i32 + dirs_x[k] as i32) as usize;
+    let dir_y: usize = (y as i32 + dirs_y[k] as i32) as usize;
 
-    if is_valid_coord(dir_x as i32, dir_y as i32, m, n) && grid[x][y] == curr_height+1 {
-      curr_count = count_trailhead_recursive(
+    if is_valid_coord(dir_x as i32, dir_y as i32, m, n) && grid[dir_x][dir_y] == curr_height+1 {
+      count_trailhead_recursive(
         dirs_x,
         dirs_y,
         grid,
+        curr_count,
         m,
         n,
-        dir_x as usize,
-        dir_y as usize,
-        curr_count,
+        dir_x,
+        dir_y,
         curr_height+1
       );
     }
   }
-  return curr_count;
+  return;
+}
+
+pub fn count_trailhead_recursive_pt2(
+  dirs_x: &Vec<i32>,
+  dirs_y: &Vec<i32>,
+  grid: &Vec<Vec<i64>>,
+  curr_count: &mut Vec<(usize, usize)>,
+  m: usize,
+  n: usize,
+  x: usize,
+  y: usize,
+  curr_height: i64
+) {
+  if grid[x][y] == 9 {
+    curr_count.push((x, y));
+    return;
+  }
+  for k in 0..dirs_x.len() {
+    let dir_x: usize = (x as i32 + dirs_x[k] as i32) as usize;
+    let dir_y: usize = (y as i32 + dirs_y[k] as i32) as usize;
+
+    if is_valid_coord(dir_x as i32, dir_y as i32, m, n) && grid[dir_x][dir_y] == curr_height+1 {
+      count_trailhead_recursive_pt2(
+        dirs_x,
+        dirs_y,
+        grid,
+        curr_count,
+        m,
+        n,
+        dir_x,
+        dir_y,
+        curr_height+1
+      );
+    }
+  }
+  return;
 }

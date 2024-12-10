@@ -1,35 +1,63 @@
-use crate::functions::count_trailhead_recursive;
+use std::collections::HashSet;
 
-pub fn part_1(lines: &Vec<Vec<i64>>) -> i64 {
-  let m = lines.len();
-  let n = lines[0].len();
-  let dirs_x = vec![-1, -1, -1, 0, 0, 1, 1, 1];
-  let dirs_y = vec![-1, 0, 1, -1, 1, -1, 0, 1];
-  let mut result = 0;
+use crate::functions::{count_trailhead_recursive, count_trailhead_recursive_pt2};
+
+pub fn part_1(grid: &Vec<Vec<i64>>) -> i64 {
+  let m = grid.len();
+  let n = grid[0].len();
+  let dirs_x = vec![-1, 0, 1, 0];
+  let dirs_y = vec![0, 1, 0, -1];
+  let mut result: i64 = 0;
   for i in 0..m {
     for j in 0..n {
-      if lines[i][j] != 0 {
+      if grid[i][j] != 0 {
         continue;
       }
-      println!("i: {}, j: {}, lines[i][j]: {}", i, j, lines[i][j]);
-      result += count_trailhead_recursive(
+      let mut nines = HashSet::new();
+      count_trailhead_recursive(
         &dirs_x,
         &dirs_y,
-        lines,
+        grid,
+        &mut nines,
         m,
         n,
         i,
         j,
-        0,
         0
       );
+      result += nines.len() as i64;
     }
   }
   result
 }
 
-pub fn part_2(lines: &Vec<Vec<i64>>) -> i64 {
-  0
+pub fn part_2(grid: &Vec<Vec<i64>>) -> i64 {
+  let m = grid.len();
+  let n = grid[0].len();
+  let dirs_x = vec![-1, 0, 1, 0];
+  let dirs_y = vec![0, 1, 0, -1];
+  let mut result: i64 = 0;
+  for i in 0..m {
+    for j in 0..n {
+      if grid[i][j] != 0 {
+        continue;
+      }
+      let mut nines = Vec::new();
+      count_trailhead_recursive_pt2(
+        &dirs_x,
+        &dirs_y,
+        grid,
+        &mut nines,
+        m,
+        n,
+        i,
+        j,
+        0
+      );
+      result += nines.len() as i64;
+    }
+  }
+  result
 }
 
 #[cfg(test)]
@@ -59,6 +87,6 @@ mod tests {
   fn part_2_works() {
     let lines = TEST_LINES.iter().map(|x| x.to_string()).collect();
     let test_input = parse_input(&lines);
-    assert_eq!(part_2(&test_input), 123);
+    assert_eq!(part_2(&test_input), 81);
   }
 }
