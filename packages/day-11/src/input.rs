@@ -1,6 +1,6 @@
 use utils::filesystem::read_lines;
 
-pub fn get_input(filename: &str) -> Vec<String> {
+pub fn get_input(filename: &str) -> Vec<i64> {
   let res = read_lines(format!("./packages/day-11/src/{}.txt", filename));
   match res {
     Ok(lines) => {
@@ -11,6 +11,12 @@ pub fn get_input(filename: &str) -> Vec<String> {
   }
 }
 
-pub fn parse_input(lines: &Vec<String>) -> Vec<String> {
-  return lines.iter().next().unwrap().split_whitespace().map(|x| x.to_string()).collect()
+pub fn parse_input(lines: &Vec<String>) -> Vec<i64> {
+  return lines
+    .iter()
+    .next()
+    .unwrap()
+    .split_whitespace()
+    .map(|x| x.to_string().parse::<i64>().unwrap())
+    .collect()
 }

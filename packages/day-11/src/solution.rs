@@ -1,11 +1,11 @@
-use crate::functions::count_stones_after_blinks;
+use crate::functions::blink_times;
 
-pub fn part_1(lines: &Vec<String>, blink_count: i64) -> i64 {
-  count_stones_after_blinks(lines, blink_count)
+pub fn part_1(lines: &Vec<i64>, blink_count: i64) -> i64 {
+  blink_times(lines, blink_count)
 }
 
-pub fn part_2(lines: &Vec<String>, blink_count: i64) -> i64 {
-  count_stones_after_blinks(lines, blink_count)
+pub fn part_2(lines: &Vec<i64>, blink_count: i64) -> i64 {
+  blink_times(lines, blink_count)
 }
 
 #[cfg(test)]

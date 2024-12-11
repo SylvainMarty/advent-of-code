@@ -1,22 +1,46 @@
-pub fn count_stones_after_blinks(lines: &Vec<String>, blink_count: i64) -> i64 {
-  let mut stones: Vec<String> = lines.clone();
-  for _ in 0..blink_count {
-    let mut new_stones: Vec<String> = Vec::new();
-    for i in 0..stones.len() {
-      let stone = stones[i].clone();
-      if stone == "0" {
-        new_stones.push("1".to_string());
-        continue;
-      }
-      let stone_len = stone.len();
-      if stone_len % 2 == 0 {
-        new_stones.push(stone[0..stone_len/2].parse::<i64>().unwrap().to_string());
-        new_stones.push(stone[stone_len/2..stone_len].parse::<i64>().unwrap().to_string());
-        continue;
-      }
-      new_stones.push((stone.parse::<i64>().unwrap() * 2024).to_string());
-    }
-    stones = new_stones;
+use std::collections::HashMap;
+
+pub fn get_stones_map(stones: &Vec<i64>) -> HashMap<i64, i64> {
+  let mut stones_map: HashMap<i64, i64> = HashMap::new();
+  for stone in stones {
+    stones_map.insert(
+      stone.clone(),
+      stones_map.get(&stone.clone()).unwrap_or(&0) + 1
+    );
   }
-  stones.len() as i64
+  stones_map
+}
+
+pub fn blink_times(lines: &Vec<i64>, blinks: i64) -> i64 {
+  let mut stones_map = get_stones_map(lines);
+  for _ in 0..blinks {
+    blink(&mut stones_map);
+  }
+  stones_map.values().sum()
+}
+
+fn blink(stones_map: &mut HashMap<i64, i64>) {
+  for (stone, count) in stones_map.clone() {
+    if count == 0 {
+      continue;
+    }
+    if stone == 0 {
+      stones_map.insert(1, stones_map.get(&1).unwrap_or(&0) + count.clone());
+      stones_map.insert(0, stones_map.get(&0).unwrap_or(&0) - count.clone());
+      continue;
+    }
+    if stone.to_string().len() % 2 == 0 {
+      let stone_str = stone.to_string();
+      let new_len = stone_str.len() / 2;
+      let stone_1 = stone_str[0..new_len].parse::<i64>().unwrap();
+      let stone_2 = stone_str[new_len..stone_str.len()].parse::<i64>().unwrap();
+      stones_map.insert(stone_1, stones_map.get(&stone_1).unwrap_or(&0) + count.clone());
+      stones_map.insert(stone_2, stones_map.get(&stone_2).unwrap_or(&0) + count.clone());
+      stones_map.insert(stone, stones_map.get(&stone).unwrap_or(&0) - count.clone());
+      continue;
+    }
+    let new_stone = stone * 2024;
+    stones_map.insert(new_stone, stones_map.get(&new_stone).unwrap_or(&0) + count.clone());
+    stones_map.insert(stone, stones_map.get(&stone).unwrap_or(&0) - count.clone());
+  }
 }
