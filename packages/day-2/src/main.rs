@@ -78,7 +78,7 @@ fn get_input() -> Vec<Vec<i32>> {
   let res = read_lines("./packages/day-2/src/input.txt");
   match res {
     Ok(lines) => {
-      for line in lines.flatten() {
+      for line in lines.map_while(Result::ok) {
         let mut nums = Vec::new();
         for num in line.split_whitespace() {
           nums.push(num.parse::<i32>().unwrap());

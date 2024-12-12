@@ -5,7 +5,7 @@ pub fn get_input(filename: &str) -> Vec<Vec<char>> {
   let res = read_lines(format!("./packages/day-6/src/{}.txt", filename));
   match res {
     Ok(lines) => {
-      for line in lines.flatten() {
+      for line in lines.map_while(Result::ok) {
         grid.push(line.chars().collect());
       }
     }

@@ -5,7 +5,7 @@ pub fn get_input(filename: &str) -> Vec<String> {
   let res = read_lines(format!("./packages/day-7/src/{}.txt", filename));
   match res {
     Ok(lines) => {
-      for line in lines.flatten() {
+      for line in lines.map_while(Result::ok) {
         vec.push(line)
       }
     }

@@ -20,14 +20,14 @@ mod tests {
   #[test]
   fn part_1_works_blink_6() {
     let lines = TEST_LINES.iter().map(|x| x.to_string()).collect();
-    let test_input = parse_input(&lines);
+    let test_input = parse_input(lines);
     assert_eq!(part_1(&test_input, 6), 22);
   }
 
   #[test]
   fn part_1_works_blink_25() {
     let lines = TEST_LINES.iter().map(|x| x.to_string()).collect();
-    let test_input = parse_input(&lines);
+    let test_input = parse_input(lines);
     assert_eq!(part_1(&test_input, 25), 55312);
   }
 }

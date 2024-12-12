@@ -24,14 +24,14 @@ mod tests {
   #[test]
   fn part_1_works() {
     let lines = TEST_LINES.iter().map(|x| x.to_string()).collect();
-    let test_input = parse_input(&lines);
+    let test_input = parse_input(lines);
     assert_eq!(part_1(&test_input), 143);
   }
 
   #[test]
   fn part_2_works() {
     let lines = TEST_LINES.iter().map(|x| x.to_string()).collect();
-    let test_input = parse_input(&lines);
+    let test_input = parse_input(lines);
     assert_eq!(part_2(&test_input), 123);
   }
 }

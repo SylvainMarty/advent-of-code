@@ -29,6 +29,9 @@ authors = ["Sylvain Marty"]
 [workspace.dependencies]
 utils = { version = "1.0.0", path = "packages/utils" }
 
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
 [[bin]]
 name = "root"
 path = "src/main.rs"

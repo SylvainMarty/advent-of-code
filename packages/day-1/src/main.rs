@@ -36,7 +36,7 @@ fn main() {
   eprintln!(" > Done part 1 in: {:?}", time_part_1);
   println!("Similarity score: {}", similarity_score);
   eprintln!(" > Done part 2 in: {:?}", time_part_2);
-  eprintln!("Total done in: {:?}", start.elapsed()); 
+  eprintln!("Total done in: {:?}", start.elapsed());
 }
 
 fn get_input_part1() -> (Vec<i32>, Vec<i32>) {
@@ -45,7 +45,7 @@ fn get_input_part1() -> (Vec<i32>, Vec<i32>) {
   let res = read_lines("./packages/day-1/src/input.txt");
   match res {
     Ok(lines) => {
-      for line in lines.flatten() {
+      for line in lines.map_while(Result::ok) {
         let mut split = line.split_whitespace();
         let first_num = split.next();
         match first_num {
@@ -70,7 +70,7 @@ fn get_input_part2() -> (Vec<i32>, [i32; 99991]) {
   let res = read_lines("./packages/day-1/src/input.txt");
   match res {
     Ok(lines) => {
-      for line in lines.flatten() {
+      for line in lines.map_while(Result::ok) {
         let mut split = line.split_whitespace();
         let first_num = split.next();
         match first_num {

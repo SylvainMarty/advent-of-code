@@ -4,7 +4,7 @@ pub fn get_input(filename: &str) -> Vec<Vec<i64>> {
   let res = read_lines(format!("./packages/day-10/src/{}.txt", filename));
   match res {
     Ok(lines) => {
-      let lines = lines.flatten();
+      let lines = lines.map_while(Result::ok);
       parse_input(&lines.collect())
     }
     Err(e) => panic!("Error reading file: {}", e),
