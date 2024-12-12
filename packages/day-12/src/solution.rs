@@ -1,5 +1,5 @@
 use std::collections::HashSet;
-use crate::functions::compute_area_and_perimeter_for_part_1;
+use crate::functions::{compute_area_and_perimeter_for_part_1, count_sides, Garden};
 
 pub fn part_1(grid: &Vec<Vec<char>>) -> i64 {
   let m = grid.len();
@@ -32,8 +32,29 @@ pub fn part_1(grid: &Vec<Vec<char>>) -> i64 {
   result
 }
 
-pub fn part_2(grid: &Vec<Vec<char>>) -> i64 {
-  0
+pub fn part_2(_: &Vec<Vec<char>>) -> i64 {
+  let input: &str = include_str!("./input.txt");
+
+    let mut garden = Garden::new(input);
+    let mut visited = vec![vec![false; garden.width]; garden.height];
+    let mut fences = HashSet::new();
+    
+    let mut result = 0;
+
+    for row in 0..garden.height {
+        for col in 0..garden.width {
+            if visited[row][col] {
+                continue;
+            }
+
+            let mut area = 0;
+            garden.mesure_area_and_fences(row, col, &mut area, &mut visited, &mut fences);
+
+            result += area * count_sides(&mut fences);
+        }
+    }
+
+    result as i64
 }
 
 #[cfg(test)]
