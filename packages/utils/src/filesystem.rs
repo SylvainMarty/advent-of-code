@@ -8,8 +8,8 @@ pub fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
 where P: AsRef<Path>, {
     let file = File::open(filename);
     match file {
-      Ok(file) => return Ok(io::BufReader::new(file).lines()),
-      Err(e) => return Err(e),
+      Ok(file) => Ok(io::BufReader::new(file).lines()),
+      Err(e) => Err(e),
     }
 }
 
@@ -35,7 +35,7 @@ mod tests {
       let res = read_lines("./src/filesystem-sample.txt");
       match res {
         Ok(lines) => {
-          for line in lines.flatten() {
+          for line in lines.map_while(Result::ok) {
             counter += 1;
             assert_eq!(line, counter.to_string());
           }

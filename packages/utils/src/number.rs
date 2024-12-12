@@ -7,5 +7,5 @@ pub fn from_base10_to_base(num: i64, base: i64) -> i64 {
       num /= base;
       factor *= 10;
   }
-  return ret;
+  ret
 }
