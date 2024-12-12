@@ -30,5 +30,5 @@ authors = ["Sylvain Marty"]
 utils = { version = "1.0.0", path = "packages/utils" }
 
 [[bin]]
-name = "test"
-path = "packages/day-1/src/main.rs"
+name = "root"
+path = "src/main.rs"
