@@ -17,7 +17,8 @@ members = [
   "packages/day-9",
   "packages/day-10",
   "packages/day-11",
-  "packages/day-12"
+  "packages/day-12",
+  "packages/day-13"
 ]
 
 [workspace.package]
@@ -28,6 +29,7 @@ authors = ["Sylvain Marty"]
 [dependencies]
 
 [workspace.dependencies]
+good_lp = { version = "1.10.0", features = ["lpsolve"]}
 utils = { version = "1.0.0", path = "packages/utils" }
 
 [workspace.lints.rust]

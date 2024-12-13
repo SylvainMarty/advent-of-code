@@ -1,5 +1,11 @@
 # advent-of-code
 
+## Requirements
+
+```sh
+sudo apt-get install coinor-cbc coinor-libcbc-dev
+```
+
 ## Add workspace
 
 1. Run this CLI to create a new day package
