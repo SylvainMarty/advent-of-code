@@ -1,0 +1,9 @@
+[package]
+name = "day-14"
+edition.workspace = true
+version.workspace = true
+authors.workspace = true
+
+[dependencies]
+cairo-rs = { version = "0.20.5", features = ["png"] }
+utils.workspace = true
