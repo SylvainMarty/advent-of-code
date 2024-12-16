@@ -121,6 +121,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "day-15"
+version = "1.0.0"
+dependencies = [
+ "utils",
+]
+
+[[package]]
 name = "day-2"
 version = "1.0.0"
 dependencies = [
