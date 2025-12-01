@@ -1,27 +1,12 @@
 [package]
-name = "advent-of-code-2024"
+name = "advent-of-code-2025"
 version = "1.0.0"
 edition = "2021"
 
 [workspace]
 members = [
   "packages/utils",
-  "packages/day-1",
-  "packages/day-2",
-  "packages/day-3",
-  "packages/day-4",
-  "packages/day-5",
-  "packages/day-6",
-  "packages/day-7",
-  "packages/day-8",
-  "packages/day-9",
-  "packages/day-10",
-  "packages/day-11",
-  "packages/day-12",
-  "packages/day-13",
-  "packages/day-14",
-  "packages/day-15",
-  "packages/day-16"
+  "packages/day-1"
 ]
 
 [workspace.package]
